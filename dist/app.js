@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const index_route_1 = __importDefault(require("./routes/index.route"));
 const post_route_1 = __importDefault(require("./routes/post.route"));
+const cors_1 = __importDefault(require("cors"));
 class App {
     constructor(port) {
         this.port = port;
@@ -30,8 +31,9 @@ class App {
     }
     middlewares() {
         this.app.use(morgan_1.default('dev'));
-        // this.app.use(express.urlencoded({ extended: false })); // it owrks for forms as jsonc
+        this.app.use(cors_1.default());
         this.app.use(express_1.default.json());
+        this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     routes() {
         this.app.use(index_route_1.default);

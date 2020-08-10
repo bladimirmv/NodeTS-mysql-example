@@ -1,0 +1,1 @@
+cloud_sql_proxy -instances=mendozarq-285821:southamerica-east1:mendozarqmysql=tcp:3306

@@ -13,27 +13,32 @@ exports.updatePost = exports.deletePost = exports.getPost = exports.createPost =
 const database_1 = require("./../database");
 function getPosts(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield database_1.connect();
-        const posts = yield conn.query('select  * from posts;');
-        return res.json(posts[0]);
+        try {
+            const conn = yield database_1.connect();
+            const posts = yield conn.query('select  * from posts;');
+            return res.json(posts[0]);
+        }
+        catch (error) {
+            return error;
+        }
     });
 }
 exports.getPosts = getPosts;
 function createPost(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const newPost = req.body;
-            const conn = yield database_1.connect();
-            yield conn.query('INSERT INTO posts SET ?', [newPost]);
-            return res.json({
-                message: 'post created'
-            });
-        }
-        catch (err) {
-            return res.json({
-                message: err
-            });
-        }
+        const newPost = req.body;
+        // try {
+        const conn = yield database_1.connect();
+        yield conn.query('INSERT INTO posts SET ?', [newPost]);
+        return res.json({
+            message: 'post created'
+        });
+        // } catch (err) {
+        // 	return res.json({
+        // 		err,
+        // 		content: newPost
+        // 	});
+        // }
     });
 }
 exports.createPost = createPost;

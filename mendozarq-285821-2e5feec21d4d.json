@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mendozarq-285821",
+  "private_key_id": "2e5feec21d4d5a011117686823f1fc910d535282",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCs+aOe2TiIK2nC\noo+iTq3NQ9WdPF6gx8FUupqYu2EzaFBnWziUhzjLfh32lT2LE6bhw+auJzAFBa7B\noFb24Ed8aCZVYv8Iz2afZSJsVBa6HBL/W2tu+0ZQryb+0fgfMR0RF0pWnSp/Drtl\np+k8+GcAvAhp0Mijvzi+H61v6jIYbRiOWwAStfJHZx8+i69QX2hvfJrQVOSW3j1Y\nf0EPjTioIwUn7Ly492gFW3SfqtZIYDlZRbtGV2Hh9vQD+o4YZVb96I92yFAY2LCv\nwT8PqdrqDVlAKf/KTElX8oGt+Vc6yaZvArApb2NTFIXgTfqxpCf1JFnRjJWNFE6a\ni70HAK/FAgMBAAECggEACbAg6IIbQ90sNKXs/4oClM8qa36r5u6cagXaWzJbgYj9\nJkMz49wmMGRYgnmqk1u/BA2rbn05ZLHQ/BbiTm948YNv0JmvCRJJgCUmjJ5LeF8F\nw8TRO2UNc78FPLTYsP6LzzilUqNfQI1VrgR9vSSruDacp571YRGruIWG4RBjGX6i\n+KriKiRTVQYr4tKu0u77oH95/3XavwtdINYOy+hOLvbI2v9UoG89fWIxsb8mgQIq\nd4ksosFy4wVatHRNJNUnaW73dhXt7PLIsxxBEKjeKsO30ZmIYYB4ae2hJop0Oh4d\n7YUCUU1H9q7MzKFfZyn7AnPO0NhB5PSAEiQo7x5E/QKBgQDwck7wvxREGc0Qe9U3\nlg7MME92oHKZn3J8DuHnNXzYu8mCxnHpQKcVEknLrR0PN+YC2lZgJhRiEVe2rD52\n7cibYXfFGW8ic5Jv3l/jLioDVqEE4l7ZA6aAuxjtyoE8QF1VsxKXOTCWd3mjeo62\nMSWQKTqv8S/aEYZo52oOlN+dowKBgQC4Kgindo2BZHf5LrENZVpgjgVd8/Fe8rLW\n4U60wftABI2FxYVJL21iZyhuxY1iLS3L+gd2FGnUVQGKhSazSNwuqR8WJOYStI31\nwOVtOZ4qJlausJUS5Y3lPEe9IwhvPn8dcTuyVpY512GQQ/q26dJ0R+pM6zWOBeXJ\nOkOgk0yDdwKBgQCZFk5IXYALs9mqCw2/rFyTiJavUoxkXu5HKjqOOLHaVAWCq9JO\nzgkTE2fEs91ymQZq/pRL9zK3FY+hEJ1cnxxAQZg992mYp7iuXQjz3aqGIZu3PmFh\nDj/uajD/BRWvRNOoArFtcs4KntrlSNygBz6BQJ7K8majEtFe7SfLTOHqvQKBgD3O\nxabGcAlsGaPEmuFfEaz0HTMCCxENrR3W8h5SOCutG34441nDlBeBfZ1nqeK4PPWH\nTXfAtB/yA5lkxK9JFbSHSAqbiaffdwFyos08mCuXQGJSm0WDS1MTHxSILG2BcRIF\njb51tudktLbBSeSXpu0lsantCsVGj28wob/Dj9tTAoGADynSwCGsHKuwRVSgCu9D\nKxddu4vMPCudHISIiPvlzA+iFsmRGnHUnpwU3Af4s2lM04p69XcXDB0mWyMyAIwv\nDbAOhuKC6GSrsy4heDeaN1kUMpmHSgsE+LuEVUXGV0QCcdLTrGT4Rh2cN47F0mgE\nfs04HsPA7KdOZfQkhy2hRcU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mendozarq@mendozarq-285821.iam.gserviceaccount.com",
+  "client_id": "110277267146502928722",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mendozarq%40mendozarq-285821.iam.gserviceaccount.com"
+}
