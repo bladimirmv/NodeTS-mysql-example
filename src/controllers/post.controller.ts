@@ -1,146 +1,117 @@
 import { post } from './../interfaces/post.interface';
 
-import { Request, Response, json } from "express";
+import { raw, Request, Response } from "express";
 import { connect } from "./../database";
-import path from 'path';
-import { Observable, async, Subject } from 'rxjs';
 
-import { Storage, Bucket } from '@google-cloud/storage';
+import aws from 'aws-sdk';
 
-
-
+import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 import multer from 'multer';
 const upload = multer({ dest: 'uploads/' });
 
 
 
+
+
+const s3 = new aws.S3({
+	accessKeyId: 'AKIA5D4TA3BXP6UMSPYH',
+	secretAccessKey: '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'
+})
+
 export async function getPosts(req: Request, res: any) {
-	// try {
+	try {
 
-	// 	const conn = await connect();
-	// 	const posts = await conn.query('select  * from posts;');
-	// 	return res.json(posts[0]);
-
-
-	// } catch (error) {
-	// 	return error;
-
-	// }
-
-	const subs$ = Observable.create(async (Subject: Subject<post[]>) => {
 		const conn = await connect();
 		const posts = await conn.query('select  * from posts;');
-		Subject.next(res.json(posts[0]));
-	});
-	const subscription = subs$.subscribe();
-	return subs$;
+		return res.json(posts[0]);
+
+	} catch (error) {
+		return error;
+	}
+
+
 }
 
-// export function sendUploadToGCS(req: any, res: any, next: any) {
-// 	if (!req.file) {
-// 		return next();
-// 	}
+export async function getBucket(req: Request, res: Response, next: any) {
+	// s3.listBuckets((err, data) => {
+	// 	if (err) throw err;
+	// 	console.log(data);
 
-// 	const gcsname = Date.now() + req.file.originalname;
-// 	const file = gc.bucket('mendocloud');
+	// });
 
-// 	const stream = file.file(req.file.originalname).createWriteStream({
-// 		metadata: {
-// 			contentType: req.file.mimetype
-// 		}
-// 	});
+	// const params = {
+	// 	Bucket: 'mendozarq'
+	// }
+	// s3.listObjectsV2(params, (err, data) => {
+	// 	if (err) throw err;
+	// 	console.log(data);
 
-// 	stream.on('error', (err) => {
-// 		req.file.cloudStorageError = err;
-// 		next(err);
-// 	});
+	// });
 
-// 	stream.on('finish', () => {
-// 		req.file.cloudStorageObject = 'mendocloud';
-// 		file.makePublic().then(() => {
-// 			req.file.cloudStoragePublicUrl = getPublicUrl('mendocloud');
-// 			next();
-// 		});
-// 	});
 
-// 	stream.end(req.file.buffer);
-// }
-function getPublicUrl(filename: any) {
-	return `https://storage.googleapis.com/mendocloud/${filename}`;
+
+	// s3.getObject({
+	// 	Bucket: 'mendozarq',
+	// 	Key: '020e728c563c0d6bbaea5dcdf85c5e3e.jpg'
+	// }, (err, data) => {
+	// 	if (err) throw err;
+	// 	console.log(data);
+	// 	fs.writeFile('img.jpg', data.Body, 'binary', (err) => {
+	// 		if (err) throw err;
+	// 		console.log('img grabada al disco');
+
+	// 	})
+	// });
+
+
+
+	// s3.upload({
+	// 	Bucket: 'mendozarq',
+	// 	Key: 'img.jpg',
+	// 	Body: req.body
+	// })
+	console.log('hola?');
+
+	// console.log('llega', req.file.size);
+
+
 }
 
 
 
 
 export async function createPost(req: Request, res: Response, next: any) {
+	// s3.upload({
+	// 	Bucket: 'mendozarq',
+	// 	Key: req.file.originalname,
+	// 	// Body: req.file.mimetype
+	// }, (err, data) => {
+	// 	if (err) throw err;
+	// 	console.log(data);
+	// });
 
 
 
 
-	const newPost = req.body;
-
-	// console.log(req.file);
-	// console.log(JSON.stringify(newPost));
+	console.log('file:', req.file);
+	console.log('body:', req.body);
 
 
+	let myFile = req.file.originalname.split('.');
+	const fileType = myFile[myFile.length - 1];
 
 
-	const gc = new Storage({
-		keyFilename: path.join(__dirname, './../../mendozarq-285821-2e5feec21d4d.json'),
-		projectId: 'mendozarq-285821'
-	});
-
-	const FilesBucket = gc.bucket('mendocloud');
-	const stream = FilesBucket.file(req.file.originalname).createWriteStream({
-		metadata: {
-			contentType: req.file.mimetype
+	s3.upload({
+		Bucket: 'mendozarq',
+		Key: `${uuidv4()}.${fileType}`,
+		Body: req.file.buffer
+	}, (err, data) => {
+		if (err) {
+			return res.status(500).send(err);
 		}
+		return res.status(200).send(data);
 	});
-
-
-	stream.on('finish', () => {
-		// req.file.cloudStorageObject = 'mendocloud';
-		FilesBucket.makePublic().then(async () => {
-			const cloudStoragePublicUrl = getPublicUrl(`${req.file.originalname}`);
-			console.log(cloudStoragePublicUrl);
-
-
-
-			const conn = await connect();
-			const data: post = req.body;
-			data.image_url = cloudStoragePublicUrl;
-
-
-			await conn.query('INSERT INTO posts SET ?', [data]);
-			return res.json({
-				message: 'cerated'
-			});
-
-			next();
-		});
-	});
-
-	stream.end(req.file.buffer);
-
-
-	// FilesBucket.upload('images/', newPost.file)
-	// 	.then((res) => {
-	// 		console.log('succes', res);
-
-	// 	})
-	// 	.catch(error => {
-	// 		console.log(error);
-
-	// 	});
-
-
-	// const { title, description } = newPost;
-	// const gg: post = {
-	// 	title,
-	// 	description
-	// };
-
-
 
 
 }

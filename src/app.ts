@@ -12,6 +12,8 @@ export class App {
 
 	constructor(private port?: number | string) {
 		this.app = express();
+
+
 		this.settings();
 		this.middlewares();
 		this.routes();
